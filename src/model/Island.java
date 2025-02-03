@@ -4,10 +4,7 @@ import config.Settings;
 import model.animals.Animal;
 import util.Direction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Island {
     private final Location[][] locations;
@@ -62,22 +59,29 @@ public class Island {
         }
     }
 
-    public void printAnimalCounts() {
+    public void printIslandStatistics() {
         Map<String, Integer> counts = new HashMap<>();
+        int totalPlants = 0;
+
         for (int y = 0; y < locations.length; y++) {
             for (int x = 0; x < locations[y].length; x++) {
-                for (Animal animal : locations[y][x].getAnimals()) {
+                Location loc = locations[y][x];
+                for (Animal animal : loc.getAnimals()) {
                     String emoji = animal.getEmoji();
                     counts.put(emoji, counts.getOrDefault(emoji, 0) + 1);
                 }
+                totalPlants += loc.getPlants().size();
             }
         }
+
         StringBuilder sb = new StringBuilder();
-        sb.append("Animal counts: ");
+        sb.append("Animals: ");
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("  ");
         }
-        System.out.println(sb.toString());
-    }
 
+        sb.append("\nPlants: 🌿: ").append(totalPlants);
+
+        System.out.println(sb);
+    }
 }

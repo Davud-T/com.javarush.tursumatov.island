@@ -1,6 +1,4 @@
-package com.island.simulation.main;
-
-
+package main;
 
 import config.Settings;
 import model.Island;
@@ -22,154 +20,157 @@ public class SimulationMain {
         int width = Settings.ISLAND_WIDTH;
         int height = Settings.ISLAND_HEIGHT;
 
-        for (int i = 0; i < Settings.INITIAL_WOLVES; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Wolf wolf = new Wolf();
-            wolf.setCurrentLocation(loc);
-            loc.addAnimal(wolf);
-        }
+        for (int u = 0; u < width; u++) {
+            for (int z = 0; z <height; z++) {
+                for (int i = 0; i < Settings.INITIAL_WOLVES_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Wolf wolf = new Wolf();
+                    wolf.setCurrentLocation(loc);
+                    loc.addAnimal(wolf);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_BOAS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Boa boa = new Boa();
-            boa.setCurrentLocation(loc);
-            loc.addAnimal(boa);
-        }
+                for (int i = 0; i < Settings.INITIAL_BOAS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Boa boa = new Boa();
+                    boa.setCurrentLocation(loc);
+                    loc.addAnimal(boa);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_FOXES; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Fox fox = new Fox();
-            fox.setCurrentLocation(loc);
-            loc.addAnimal(fox);
-        }
+                for (int i = 0; i < Settings.INITIAL_FOXES_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Fox fox = new Fox();
+                    fox.setCurrentLocation(loc);
+                    loc.addAnimal(fox);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_BEARS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Bear bear = new Bear();
-            bear.setCurrentLocation(loc);
-            loc.addAnimal(bear);
-        }
+                for (int i = 0; i < Settings.INITIAL_BEARS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Bear bear = new Bear();
+                    bear.setCurrentLocation(loc);
+                    loc.addAnimal(bear);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_EAGLES; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Eagle eagle = new Eagle();
-            eagle.setCurrentLocation(loc);
-            loc.addAnimal(eagle);
-        }
+                for (int i = 0; i < Settings.INITIAL_EAGLES_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Eagle eagle = new Eagle();
+                    eagle.setCurrentLocation(loc);
+                    loc.addAnimal(eagle);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_RABBITS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Rabbit rabbit = new Rabbit();
-            rabbit.setCurrentLocation(loc);
-            loc.addAnimal(rabbit);
-        }
+                for (int i = 0; i < Settings.INITIAL_RABBITS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Rabbit rabbit = new Rabbit();
+                    rabbit.setCurrentLocation(loc);
+                    loc.addAnimal(rabbit);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_HORSES; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Horse horse = new Horse();
-            horse.setCurrentLocation(loc);
-            loc.addAnimal(horse);
-        }
+                for (int i = 0; i < Settings.INITIAL_HORSES_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Horse horse = new Horse();
+                    horse.setCurrentLocation(loc);
+                    loc.addAnimal(horse);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_DEERS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Deer deer = new Deer();
-            deer.setCurrentLocation(loc);
-            loc.addAnimal(deer);
-        }
+                for (int i = 0; i < Settings.INITIAL_DEERS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Deer deer = new Deer();
+                    deer.setCurrentLocation(loc);
+                    loc.addAnimal(deer);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_MICE; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Mouse mouse = new Mouse();
-            mouse.setCurrentLocation(loc);
-            loc.addAnimal(mouse);
-        }
+                for (int i = 0; i < Settings.INITIAL_MICE_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Mouse mouse = new Mouse();
+                    mouse.setCurrentLocation(loc);
+                    loc.addAnimal(mouse);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_GOATS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Goat goat = new Goat();
-            goat.setCurrentLocation(loc);
-            loc.addAnimal(goat);
-        }
+                for (int i = 0; i < Settings.INITIAL_GOATS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Goat goat = new Goat();
+                    goat.setCurrentLocation(loc);
+                    loc.addAnimal(goat);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_SHEEPS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Sheep sheep = new Sheep();
-            sheep.setCurrentLocation(loc);
-            loc.addAnimal(sheep);
-        }
+                for (int i = 0; i < Settings.INITIAL_SHEEPS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Sheep sheep = new Sheep();
+                    sheep.setCurrentLocation(loc);
+                    loc.addAnimal(sheep);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_BOARS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Boar boar = new Boar();
-            boar.setCurrentLocation(loc);
-            loc.addAnimal(boar);
-        }
+                for (int i = 0; i < Settings.INITIAL_BOARS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Boar boar = new Boar();
+                    boar.setCurrentLocation(loc);
+                    loc.addAnimal(boar);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_BUFFALO; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Buffalo buffalo = new Buffalo();
-            buffalo.setCurrentLocation(loc);
-            loc.addAnimal(buffalo);
-        }
+                for (int i = 0; i < Settings.INITIAL_BUFFALO_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Buffalo buffalo = new Buffalo();
+                    buffalo.setCurrentLocation(loc);
+                    loc.addAnimal(buffalo);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_DUCKS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Duck duck = new Duck();
-            duck.setCurrentLocation(loc);
-            loc.addAnimal(duck);
-        }
+                for (int i = 0; i < Settings.INITIAL_DUCKS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Duck duck = new Duck();
+                    duck.setCurrentLocation(loc);
+                    loc.addAnimal(duck);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_CATERPILLARS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            Caterpillar caterpillar = new Caterpillar();
-            caterpillar.setCurrentLocation(loc);
-            loc.addAnimal(caterpillar);
-        }
+                for (int i = 0; i < Settings.INITIAL_CATERPILLARS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    Caterpillar caterpillar = new Caterpillar();
+                    caterpillar.setCurrentLocation(loc);
+                    loc.addAnimal(caterpillar);
+                }
 
-        for (int i = 0; i < Settings.INITIAL_PLANTS; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            Location loc = island.getLocation(x, y);
-            loc.addPlant(new Plant("🌿"));
+                for (int i = 0; i < Settings.INITIAL_PLANTS_PER_CELL; i++) {
+                    int x = random.nextInt(width);
+                    int y = random.nextInt(height);
+                    Location loc = island.getLocation(x, y);
+                    loc.addPlant(new Plant("🌿"));
+                }
+            }
         }
-
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             System.out.println("---- New Day ----");
             island.simulationTick();
-            island.printAnimalCounts();
+            island.printIslandStatistics();
         }, 0, Settings.TICK_DURATION_MS, TimeUnit.MILLISECONDS);
 
         try {
@@ -179,5 +180,6 @@ public class SimulationMain {
         }
         scheduler.shutdown();
         System.out.println("Simulation terminated.");
+
     }
 }
