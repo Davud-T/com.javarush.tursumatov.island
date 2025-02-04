@@ -79,9 +79,10 @@ public class FoodChain {
     public static int getProbability(Class<?> predator, Class<?> prey) {
         Map<Class<?>, Integer> predatorMap = foodProbabilities.get(predator);
         if (predatorMap != null) {
-            Integer chance = predatorMap.get(prey);
-            if (chance != null) {
-                return chance;
+            for (Map.Entry<Class<?>, Integer> entry : predatorMap.entrySet()) {
+                if (entry.getKey().isAssignableFrom(prey)) {
+                    return entry.getValue();
+                }
             }
         }
         return 0;

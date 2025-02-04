@@ -1,5 +1,6 @@
 package model;
 
+import config.Settings;
 import model.animals.Animal;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,13 @@ public class Location {
 
     public int getY() {
         return y;
+    }
+
+    public void growPlants() {
+        int currentPlants = plants.size();
+        for (int i = 0; i < Settings.PLANT_GROWTH_PER_TICK && currentPlants + i < Settings.MAX_PLANTS_PER_CELL; i++) {
+            plants.add(new Plant("🌿"));
+        }
     }
 
     @Override

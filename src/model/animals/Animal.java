@@ -16,7 +16,7 @@ public abstract class Animal {
         this.maxPopulationPerCell = maxPopulationPerCell;
         this.maxSpeed = maxSpeed;
         this.foodRequired = foodRequired;
-        this.currentFoodLevel = foodRequired; // Начинаем с полного насыщения
+        this.currentFoodLevel = foodRequired / 3;
     }
 
     public void setCurrentLocation(Location location) {
@@ -34,8 +34,12 @@ public abstract class Animal {
     public abstract void reproduce();
 
     public boolean updateHunger() {
-        currentFoodLevel -= 1;  // Каждый такт животное теряет 1 единицу сытости
+        currentFoodLevel -= (weight / 20);
         return currentFoodLevel > 0;
+    }
+
+    public double getWeight() {
+        return weight;
     }
 
     public String getEmoji() {

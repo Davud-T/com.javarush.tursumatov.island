@@ -19,13 +19,15 @@ public class Eagle extends Animal {
     public void eat() {
         Location loc = getCurrentLocation();
         boolean ate = false;
+
         for (Animal a : loc.getAnimals()) {
             if (a instanceof Herbivore) {
-                int chance = FoodChain.getProbability(Boa.class, a.getClass());
+                int chance = FoodChain.getProbability(Eagle.class, a.getClass());
                 int roll = ThreadLocalRandom.current().nextInt(100);
+
                 if (roll < chance) {
                     loc.removeAnimal(a);
-                    currentFoodLevel = foodRequired;
+                    currentFoodLevel = Math.min(currentFoodLevel + a.getWeight(), foodRequired);
                     ate = true;
                     break;
                 }

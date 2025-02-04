@@ -4,8 +4,6 @@ import model.Island;
 import model.Location;
 import model.animals.Animal;
 import model.animals.herbivores.Herbivore;
-import model.animals.herbivores.Rabbit;
-import util.Direction;
 import util.FoodChain;
 
 import java.util.List;
@@ -20,15 +18,15 @@ public class Wolf extends Animal {
     public void eat() {
         Location loc = getCurrentLocation();
         boolean ate = false;
-        // Перебираем все объекты в локации
+
         for (Animal a : loc.getAnimals()) {
-            // Если добыча является травоядной
             if (a instanceof Herbivore) {
                 int chance = FoodChain.getProbability(Wolf.class, a.getClass());
                 int roll = ThreadLocalRandom.current().nextInt(100);
+
                 if (roll < chance) {
                     loc.removeAnimal(a);
-                    currentFoodLevel = foodRequired; // насыщаемся полностью
+                    currentFoodLevel = Math.min(currentFoodLevel + a.getWeight(), foodRequired);
                     ate = true;
                     break;
                 }

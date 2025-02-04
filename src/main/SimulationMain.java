@@ -166,7 +166,7 @@ public class SimulationMain {
             }
         }
 
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(4);
         scheduler.scheduleAtFixedRate(() -> {
             System.out.println("---- New Day ----");
             island.simulationTick();

@@ -47,10 +47,22 @@ public class Island {
         for (int y = 0; y < locations.length; y++) {
             for (int x = 0; x < locations[y].length; x++) {
                 Location loc = locations[y][x];
+
+                List<Animal> animalsToRemove = new ArrayList<>();
+                for (Animal animal : loc.getAnimals()) {
+                    if (!animal.updateHunger()) {
+                        animalsToRemove.add(animal);
+                    }
+                }
+                for (Animal dead : animalsToRemove) {
+                    loc.removeAnimal(dead);
+                }
+
                 for (Animal animal : loc.getAnimals()) {
                     animal.eat();
                     animal.move(this);
                     animal.reproduce();
+                    loc.growPlants();
                     if (!animal.updateHunger()) {
                         loc.removeAnimal(animal);
                     }
