@@ -24,7 +24,6 @@ public class IslandApp {
                     Location loc = island.getLocation(i, j);
                     List<Animal> animals = loc.getAnimalsSnapshot();
                     for (Animal animal : animals) {
-                        // Если животное уже погибло – пропускаем
                         if (!animal.isAlive()) continue;
                         animalExecutor.submit(() -> {
                             animal.act(island);
