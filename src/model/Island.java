@@ -1,99 +1,61 @@
 package model;
 
-import config.Settings;
 import model.animals.Animal;
-import util.Direction;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Island {
+    private final int width;
+    private final int height;
     private final Location[][] locations;
 
-    public Island() {
-        int width = Settings.ISLAND_WIDTH;
-        int height = Settings.ISLAND_HEIGHT;
-        locations = new Location[height][width];
-
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                locations[y][x] = new Location(x, y);
+    public Island(int width, int height) {
+        this.width = width;
+        this.height = height;
+        locations = new Location[width][height];
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                locations[i][j] = new Location(i, j);
             }
         }
     }
+
+    public int getWidth() { return width; }
+    public int getHeight() { return height; }
 
     public Location getLocation(int x, int y) {
-        if (x < 0 || x >= Settings.ISLAND_WIDTH || y < 0 || y >= Settings.ISLAND_HEIGHT) {
-            return null;
-        }
-        return locations[y][x];
+        return locations[x][y];
     }
 
-    public List<Location> getAdjacentLocations(Location loc) {
-        List<Location> adjacent = new ArrayList<>();
-        int x = loc.getX();
-        int y = loc.getY();
-        for (Direction d : Direction.values()) {
-            int newX = x + d.getDx();
-            int newY = y + d.getDy();
-            Location neighbor = getLocation(newX, newY);
-            if (neighbor != null) {
-                adjacent.add(neighbor);
-            }
-        }
-        return adjacent;
-    }
-
-    public void simulationTick() {
-        for (int y = 0; y < locations.length; y++) {
-            for (int x = 0; x < locations[y].length; x++) {
-                Location loc = locations[y][x];
-
-                List<Animal> animalsToRemove = new ArrayList<>();
-                for (Animal animal : loc.getAnimals()) {
-                    if (!animal.updateHunger()) {
-                        animalsToRemove.add(animal);
-                    }
-                }
-                for (Animal dead : animalsToRemove) {
-                    loc.removeAnimal(dead);
-                }
-
-                for (Animal animal : loc.getAnimals()) {
-                    animal.eat();
-                    animal.move(this);
-                    animal.reproduce();
-                    loc.growPlants();
-                    if (!animal.updateHunger()) {
-                        loc.removeAnimal(animal);
-                    }
-                }
-            }
-        }
-    }
-
-    public void printIslandStatistics() {
-        Map<String, Integer> counts = new HashMap<>();
+    public void printStatistics() {
+        Map<String, Integer> speciesCount = new HashMap<>();
         int totalPlants = 0;
-
-        for (int y = 0; y < locations.length; y++) {
-            for (int x = 0; x < locations[y].length; x++) {
-                Location loc = locations[y][x];
-                for (Animal animal : loc.getAnimals()) {
-                    String emoji = animal.getEmoji();
-                    counts.put(emoji, counts.getOrDefault(emoji, 0) + 1);
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                Location loc = locations[i][j];
+                List<Animal> animals = loc.getAnimalsSnapshot();
+                for (Animal a : animals) {
+                    speciesCount.put(a.getSpecies(), speciesCount.getOrDefault(a.getSpecies(), 0) + 1);
                 }
-                totalPlants += loc.getPlants().size();
+                totalPlants += loc.getPlantCount();
             }
         }
+        System.out.println("=== Статистика острова ===");
+        speciesCount.forEach((species, count) ->
+                System.out.println(species + ": " + count));
+        System.out.println("Растения (всего): " + totalPlants);
+        System.out.println("==========================");
+    }
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Animals: ");
-        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("  ");
+    public int getTotalAnimalCount() {
+        int count = 0;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                count += locations[i][j].getAnimalsSnapshot().size();
+            }
         }
-
-        sb.append("\nPlants: 🌿: ").append(totalPlants);
-
-        System.out.println(sb);
+        return count;
     }
 }

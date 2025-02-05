@@ -1,53 +1,22 @@
 package model.animals.herbivores;
 
-import model.Island;
 import model.Location;
-import model.Plant;
 import model.animals.Animal;
+import model.animals.Herbivore;
 
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
-public class Deer extends Animal implements Herbivore {
-    public Deer() {
-        super(300, 20, 4, 50);
+public class Deer extends Herbivore {
+    public Deer(Location location) {
+        super(location);
+        this.species = "Deer";
+        this.weight = 300;
+        this.maxCountPerCell = 20;
+        this.speed = 4;
+        this.requiredFood = 50;
+        this.energy = getMaxEnergy();
     }
 
     @Override
-    public void eat() {
-        Location loc = getCurrentLocation();
-        if (!loc.getPlants().isEmpty()) {
-            Plant plant = loc.getPlants().get(0);
-            loc.removePlant(plant);
-            currentFoodLevel = foodRequired;
-        }
-    }
-
-    @Override
-    public void move(Island island) {
-        List<Location> adjacent = island.getAdjacentLocations(getCurrentLocation());
-        Location randomLoc = adjacent.get(ThreadLocalRandom.current().nextInt(adjacent.size()));
-        getCurrentLocation().removeAnimal(this);
-        randomLoc.addAnimal(this);
-        setCurrentLocation(randomLoc);
-    }
-
-    @Override
-    public void reproduce() {
-        Location loc = getCurrentLocation();
-        int count = 0;
-        for (Animal a : loc.getAnimals()) {
-            if (a instanceof Deer) count++;
-        }
-        if (count >= 2 && count < maxPopulationPerCell) {
-            Deer baby = new Deer();
-            baby.setCurrentLocation(loc);
-            loc.addAnimal(baby);
-        }
-    }
-
-    @Override
-    public String getEmoji() {
-        return "🦌";
+    protected Animal createOffspring(Location location) {
+        return new Deer(location);
     }
 }

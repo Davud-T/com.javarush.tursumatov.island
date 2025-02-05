@@ -4,19 +4,19 @@ import model.Location;
 import model.animals.Animal;
 import model.animals.Herbivore;
 
-public class Rabbit extends Herbivore {
-    public Rabbit(Location location) {
+public class WildBoar extends Herbivore {
+    public WildBoar(Location location) {
         super(location);
-        this.species = "Rabbit";
-        this.weight = 2;
-        this.maxCountPerCell = 150;
+        this.species = "WildBoar";
+        this.weight = 400;
+        this.maxCountPerCell = 50;
         this.speed = 2;
-        this.requiredFood = 0.45;
+        this.requiredFood = 50;
         this.energy = getMaxEnergy();
     }
 
     @Override
     protected Animal createOffspring(Location location) {
-        return new Rabbit(location);
+        return new WildBoar(location);
     }
 }
